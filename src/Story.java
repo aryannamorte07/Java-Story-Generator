@@ -90,38 +90,45 @@ public class Story {
 
   public String chooseStory(String userInput){
 
-    ArrayList<String> words = findGenres(userInput);
+  ArrayList<String> matchedGenres = findGenres(userInput);
+  ArrayList<String> possibleScenarios = new ArrayList<String>();
 
-    ArrayList<String> possibleScenarios = new ArrayList<String>();
+  for(int i = 0; i < matchedGenres.size(); i++){
 
-    for(int i = 0; i < words.size(); i++){
+    String line = matchedGenres.get(i);
 
-      String[] phrase = words.get(i).split(",");
+    int colonIndex = TextProcessor.getSemicolon(line);
 
-      for(int j = 0; j < synopsis.size(); j++){
+    String keywordSection = line.substring(colonIndex + 1);
 
-        for(int k = 0; k < phrase.length; k++){
+    String[] keywords = keywordSection.split(",");
 
-          if(synopsis.get(j).contains(phrase[k])){
+    for(int j = 0; j < synopsis.size(); j++){
 
-            possibleScenarios.add(synopsis.get(j));
+      String story = synopsis.get(j).toLowerCase();
 
-          }
+      for(int k = 0; k < keywords.length; k++){
 
+        String keyword = keywords[k].trim().toLowerCase();
+
+        if(story.contains(keyword)){
+          possibleScenarios.add(synopsis.get(j));
         }
 
       }
 
     }
 
-    if(possibleScenarios.size() == 0){
-      return "goes on a mysterious adventure";
-    }
-
-    int index = (int)(Math.random() * possibleScenarios.size());
-
-    return possibleScenarios.get(index);
   }
+
+  if(possibleScenarios.size() == 0){
+    return "goes on a mysterious adventure";
+  }
+
+  int index = (int)(Math.random() * possibleScenarios.size());
+
+  return possibleScenarios.get(index);
+}
 
   public double getSentiment(String userResponse) {
 
