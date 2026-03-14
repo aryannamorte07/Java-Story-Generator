@@ -1,0 +1,9 @@
+Empire of Princes:0.1
+Clue of the Artificial Claw:-0.2
+The Plague of Lodgestar:-0.99
+Year of Dead:-0.4
+The Face of Magician:0.5
+Case of the Four Eyed Monkey:0.01
+Spare Parts:0.4
+Dust Ascending:-0.1
+Storm of the Fog:-0.5
